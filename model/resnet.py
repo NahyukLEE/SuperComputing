@@ -103,6 +103,7 @@ class ResNet(nn.Module):
         self.avg_pool = nn.AdaptiveAvgPool2d((1,1))
         self.fc1 = nn.Linear(512 * block.expansion, 22)
         self.fc2 = nn.Linear(22, 2)
+        self.fc3 = nn.Linear(512 * block.expansion, 2)
         # weights inittialization
         if init_weights:
             self._initialize_weights()
@@ -125,9 +126,10 @@ class ResNet(nn.Module):
         x = self.avg_pool(x)
         x = x.view(x.size(0), -1)
         
-        feature = self.fc1(x)
-        av = self.fc2(feature)
-        return feature, av
+        #feature = self.fc1(x)
+        #av = self.fc2(feature)
+        av = self.fc3(x)
+        return av
 
     # define weight initialization function
     def _initialize_weights(self):
