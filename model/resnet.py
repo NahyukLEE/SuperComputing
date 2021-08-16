@@ -126,8 +126,6 @@ class ResNet(nn.Module):
         x = self.avg_pool(x)
         x = x.view(x.size(0), -1)
         
-        #feature = self.fc1(x)
-        #av = self.fc2(feature)
         av = self.fc3(x)
         return av
 
